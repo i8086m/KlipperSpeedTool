@@ -1,0 +1,45 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ourVersions">
+        <value>
+          <list size="2">
+            <item index="0" class="java.lang.String" itemvalue="3.12" />
+            <item index="1" class="java.lang.String" itemvalue="3.10" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredBaseClasses">
+        <list>
+          <option value="unittest.TestCase" />
+          <option value="unittest.case.TestCase" />
+          <option value="imgviewer.utils.fluid_qt.Buildable" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="eel.*" />
+          <option value="visioneer.__main__.Label.*" />
+          <option value="visioneer.__main__.BuildableWidget.*" />
+          <option value="visioneer.utils.fluid_qt.Label.*" />
+          <option value="visioneer.utils.fluid_qt.VBoxLayout.*" />
+          <option value="visioneer.utils.fluid_qt.RadioButton.*" />
+          <option value="visioneer.utils.fluid_qt.ListWidget.*" />
+          <option value="imgviewer.utils.fluid_qt.RadioButton.*" />
+          <option value="imgviewer.utils.fluid_qt.Label.*" />
+          <option value="imgviewer.utils.fluid_qt.VBoxLayout.*" />
+          <option value="imgviewer.utils.fluid_qt.ListWidget.*" />
+          <option value="imgviewer.utils.fluid_qt.TabWidget.*" />
+          <option value="imgviewer.utils.fluid_qt.TreeView.*" />
+          <option value="imgviewer.utils.fluid_qt.PushButton.*" />
+          <option value="imgviewer.tabs.Visioneer.ImageListWidget.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
