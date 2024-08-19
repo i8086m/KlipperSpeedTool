@@ -21,8 +21,8 @@ def get_all_circle_coords(x_center, y_center, radius, n_points):
     return [get_circle_coord(theta, x_center, y_center, radius) for theta in thetas]
 
 
-circle_coords = get_all_circle_coords(x_center=640,
-                                      y_center=480,
+circle_coords = get_all_circle_coords(x_center=0,
+                                      y_center=0,
                                       radius=2,
                                       n_points=25)
 
@@ -33,7 +33,7 @@ def get_max_speed(tpath):
 
 
 toolhead = ToolHead(max_velocity=500, max_accel=15000, mcr=0.0, scv=20.0)
-toolhead.set_position((640 + 2, 480))
+toolhead.set_position((2, 0))
 
 for coord in circle_coords:
     toolhead.move(coord, 500)
