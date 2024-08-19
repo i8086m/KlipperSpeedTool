@@ -12,6 +12,9 @@ import math
 #   seconds), _r is ratio (scalar between 0.0 and 1.0)
 
 # Class to track each move request
+
+avgspeed = []
+
 class Move:
     def __init__(self, toolhead, start_pos, end_pos, speed):
         self.toolhead = toolhead
@@ -100,6 +103,10 @@ class Move:
         cruise_t = cruise_d / cruise_v
         decel_t = decel_d / ((end_v + cruise_v) * 0.5)
         full_t = accel_t + cruise_t + decel_t
+
+        avg_v = self.move_d / full_t
+        avgspeed.append(avg_v)
+        print(avg_v)
 
         # print(f'Move from ({self.start_pos[0]}, {self.start_pos[1]}) to ({self.end_pos[0]}, {self.end_pos[1]})')
 

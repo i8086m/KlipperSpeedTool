@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
-from KlippySim import ToolHead
+from KlippySim import ToolHead, avgspeed
 
 
 def get_circle_coord(theta, x_center, y_center, radius):
@@ -23,8 +23,8 @@ def get_all_circle_coords(x_center, y_center, radius, n_points):
 
 circle_coords = get_all_circle_coords(x_center=640,
                                       y_center=480,
-                                      radius=15,
-                                      n_points=40)
+                                      radius=2,
+                                      n_points=25)
 
 
 def get_max_speed(tpath):
@@ -32,8 +32,8 @@ def get_max_speed(tpath):
     return math.ceil(max(speeds) + 1)
 
 
-toolhead = ToolHead(max_velocity=500, max_accel=5000, mcr=0.5, scv=5.0)
-toolhead.set_position((640 + 15, 480))
+toolhead = ToolHead(max_velocity=500, max_accel=15000, mcr=0.0, scv=20.0)
+toolhead.set_position((640 + 2, 480))
 
 for coord in circle_coords:
     toolhead.move(coord, 500)
@@ -58,7 +58,7 @@ def plot_gradient_line(point1, point2, color1, color2):
     gradient_colors = np.linspace(color1, color2, num_points)
 
     colormap = plt.get_cmap('plasma')
-    colors = colormap(gradient_colors)[:, :3]  # Get RGB colors
+    colors = colormap(gradient_colors)[:, :3]
 
     points = np.array([x, y]).T.reshape(-1, 1, 2)
     segments = np.concatenate([points[:-1], points[1:]], axis=1)
@@ -83,6 +83,8 @@ def render_toolpath(tpath):
 
 
 render_toolpath(toolhead.lookahead.output)
+avg_spd = round(sum(avgspeed[1:-1]) / len(avgspeed[1:-1]), 2)
+plt.figtext(0.5, 0.01, f"MaxSpeed={toolhead.max_velocity} Accel={toolhead.max_accel} SCV={toolhead.square_corner_velocity} MCR={toolhead.min_cruise_ratio} AvgSpeed={avg_spd}", ha="center", fontsize=18, bbox={"facecolor":"orange", "alpha":0.5, "pad":5})
 ax.autoscale()
 plt.gca().set_aspect('equal')
 plt.show()
