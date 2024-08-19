@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
+from ArcParser import ArcParser
 from KlippySim import ToolHead, avgspeed
 
 
@@ -23,8 +24,10 @@ def get_all_circle_coords(x_center, y_center, radius, n_points):
 
 circle_coords = get_all_circle_coords(x_center=0,
                                       y_center=0,
-                                      radius=2,
-                                      n_points=25)
+                                      radius=15,
+                                      n_points=160)
+
+#circle_coords = ArcParser().G3(i=0.0, j=-15.0)
 
 
 def get_max_speed(tpath):
@@ -32,8 +35,8 @@ def get_max_speed(tpath):
     return math.ceil(max(speeds) + 1)
 
 
-toolhead = ToolHead(max_velocity=500, max_accel=15000, mcr=0.0, scv=20.0)
-toolhead.set_position((2, 0))
+toolhead = ToolHead(max_velocity=500, max_accel=10000, mcr=0.0, scv=5.0)
+toolhead.set_position((15, 0, 0))
 
 for coord in circle_coords:
     toolhead.move(coord, 500)
@@ -82,9 +85,12 @@ def render_toolpath(tpath):
         plot_gradient_line(move[0][0], move[0][1], color_start, color_end)
 
 
+print(len(avgspeed))
+print(len(avgspeed))
 render_toolpath(toolhead.lookahead.output)
 avg_spd = round(sum(avgspeed[1:-1]) / len(avgspeed[1:-1]), 2)
-plt.figtext(0.5, 0.01, f"MaxSpeed={toolhead.max_velocity} Accel={toolhead.max_accel} SCV={toolhead.square_corner_velocity} MCR={toolhead.min_cruise_ratio} AvgSpeed={avg_spd}", ha="center", fontsize=18, bbox={"facecolor":"orange", "alpha":0.5, "pad":5})
+cruise_spd = round(sum(avgspeed[len(avgspeed)//5:-len(avgspeed)//5]) / len(avgspeed[len(avgspeed)//5:-len(avgspeed)//5]), 2)
+plt.figtext(0.5, 0.01, f"MaxSpeed={toolhead.max_velocity} Accel={toolhead.max_accel} SCV={toolhead.square_corner_velocity} MCR={toolhead.min_cruise_ratio} AvgSpeed={avg_spd} AvgCruiseSpeed={cruise_spd}", ha="center", fontsize=18, bbox={"facecolor":"orange", "alpha":0.5, "pad":5})
 ax.autoscale()
 plt.gca().set_aspect('equal')
 plt.show()
