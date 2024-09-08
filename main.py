@@ -31,8 +31,8 @@ circle_coords = get_all_circle_coords(x_center=0,
 
 
 def get_max_speed(tpath):
-    speeds = [x[1][0] for x in tpath] + [x[1][0] for x in tpath]
-    return math.ceil(max(speeds) + 1)
+    speeds = [x[1][1] for x in tpath]
+    return math.ceil(max(speeds))
 
 
 toolhead = ToolHead(max_velocity=500, max_accel=10000, mcr=0.0, scv=5.0)
